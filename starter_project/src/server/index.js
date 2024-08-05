@@ -15,6 +15,8 @@ app.use(express.static("dist"));
 console.log(__dirname);
 
 // Variables for url and api key
+// Initialize MeaningCloud API credentials
+const apiKey = process.env.MEANINGCLOUD_API_KEY;
 
 app.get("/", function (req, res) {
   res.sendFile("dist/index.html");
