@@ -1,16 +1,17 @@
 import { checkForUrl } from "./urlChecker";
 
-const serverURL = "http://localhost:8000/sentiment";
+const serverURL = "http://localhost:8081/sentiment";
 
 const form = document.getElementById("urlForm");
 form.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
+  Client.checkForUrl;
   event.preventDefault();
 
   const formText = document.getElementById("name").value;
 
-  if (!checkForUrl(formText)) {
+  if (!Client.checkForUrl(formText)) {
     alert("Please enter a valid URL");
     return;
   }
