@@ -1,12 +1,31 @@
 form {
-    border: 1px solid #545454;
-    border-radius: 3px;
-    padding: 40px;
-}
+  border: 1px solid #545454;
+  border-radius: 5px; // More rounded corners for a softer look
+  padding: 40px;
+  background-color: #ffffff; // White background for the form
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow for a lifted effect
 
-input {
-    padding: 5px 20px;
-    width: 100%;
-    line-height: 16px;
+  input {
+    padding: 10px 20px; // Increased padding for better spacing
+    width: calc(100% - 22px); // Adjust width considering padding and border
+    line-height: 20px;
     margin: 10px 0;
+    border: 1px solid #ced4da; // Lighter border color for the input
+    border-radius: 4px; // Slightly rounded corners for the input
+  }
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; // Primary color for the button
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3; // Darker shade on hover
+    }
+  }
 }

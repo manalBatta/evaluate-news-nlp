@@ -1,5 +1,19 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; // Align items vertically centered
+  padding: 10px 40px;
+  background-color: #f8f9fa; // Light background color for the header
+  border-bottom: 1px solid #dee2e6; // Subtle border at the bottom
+
+  .logo {
+    font-size: 24px; // Larger font size for the logo
+    font-weight: bold;
+    color: #343a40; // Dark color for contrast
+  }
+
+  .navigation {
+    font-size: 18px;
+    color: #495057; // Slightly lighter color for the navigation
+  }
 }

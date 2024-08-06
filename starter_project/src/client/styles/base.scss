@@ -1,14 +1,25 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url(../assest/Sentiment-Analysis-Template-03.webp);
 }
 
 main {
-    flex: 2;
+  flex: 2;
 }
 
 section {
-    max-width: 800px;
-    margin: 50px auto;
+  max-width: 800px;
+  margin: 50px auto;
+}
+#results {
+  border: 1px solid #545454;
+  border-radius: 5px; // More rounded corners for a softer look
+  padding: 40px;
+  background-color: #ffffff; // White background for the form
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Subtle shadow for a lifted effect
+}
+#logo {
+  background-image: url(../assest/logo.jpg);
 }
