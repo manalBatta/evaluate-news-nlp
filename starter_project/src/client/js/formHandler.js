@@ -1,30 +1,66 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+import { checkForUrl } from "./urlChecker";
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = 'https://localhost:8000/api'
+const serverURL = "http://localhost:8000/sentiment";
 
-const form = document.getElementById('urlForm');
-form.addEventListener('submit', handleSubmit);
+const form = document.getElementById("urlForm");
+form.addEventListener("submit", handleSubmit);
 
 function handleSubmit(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    // Get the URL from the input field
-    const formText = document.getElementById('name').value;
+  const formText = document.getElementById("name").value;
 
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
-    
-    // Check if the URL is valid
- 
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+  if (!checkForUrl(formText)) {
+    alert("Please enter a valid URL");
+    return;
+  }
+
+  sendData({ url: formText })
+    .then((data) => {
+      displayResults(data);
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      document.getElementById("sentimentType").innerHTML = "";
+      document.getElementById("sentimentScore").innerHTML = "";
+      document.getElementById("additionalInfo").innerHTML =
+        "Error fetching sentiment analysis results. Please try again later.";
+    });
 }
 
-// Function to send data to the server
+async function sendData(data = {}) {
+  const response = await fetch(serverURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
 
-// Export the handleSubmit function
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+
+  return await response.json();
+}
+
+function displayResults(data) {
+  // Example of expected response structure
+  const sentimentType = data.sentiment?.type || "N/A";
+  const sentimentScore = data.score_tag || "N/A";
+  const agreement = data.agreement || "N/A";
+  const subjectivity = data.subjectivity || "N/A";
+
+  document.getElementById(
+    "sentimentType"
+  ).innerHTML = `<strong>Sentiment Type:</strong> ${sentimentType}`;
+  document.getElementById(
+    "sentimentScore"
+  ).innerHTML = `<strong>Sentiment Score:</strong> ${sentimentScore}`;
+  document.getElementById("additionalInfo").innerHTML = `
+        <strong>Agreement:</strong> ${agreement} <br />
+        <strong>Subjectivity:</strong> ${subjectivity}
+    `;
+}
+
 export { handleSubmit };
-

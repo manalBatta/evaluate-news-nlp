@@ -1,10 +1,8 @@
-// js files
-import { checkForName } from "./js/nameChecker";
 import { handleSubmit } from "./js/formHandler";
 
-console.log(checkForName);
-
 alert("I EXIST");
+
+document.getElementById("urlForm").addEventListener("submit", handleSubmit);
 
 // sass files
 import "./styles/resets.scss";
