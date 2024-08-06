@@ -46,14 +46,18 @@ async function sendData(data = {}) {
 
 function displayResults(data) {
   // Example of expected response structure
-  const sentimentType = data.sentiment?.type || "N/A";
+  const sentimentText = data.sentence_list[0].text || "N/A";
   const sentimentScore = data.score_tag || "N/A";
   const agreement = data.agreement || "N/A";
   const subjectivity = data.subjectivity || "N/A";
+  const sentimentConfidence = data.confidence || "N/A";
 
   document.getElementById(
-    "sentimentType"
-  ).innerHTML = `<strong>Sentiment Type:</strong> ${sentimentType}`;
+    "sentimentConfidence"
+  ).innerHTML = `<strong>Sentiment Confidence:</strong> "${sentimentConfidence}"`;
+  document.getElementById(
+    "sentimentText"
+  ).innerHTML = `<strong>Sentiment Text:</strong> "${sentimentText}"`;
   document.getElementById(
     "sentimentScore"
   ).innerHTML = `<strong>Sentiment Score:</strong> ${sentimentScore}`;
