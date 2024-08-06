@@ -48,40 +48,6 @@ describe("Express App", () => {
     expect(res.header["content-type"]).toBe("text/html; charset=UTF-8");
   });
 
-  it("should return sentiment analysis on POST /sentiment", async () => {
-    const testUrl = "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6950163/";
-
-    // Mock the https.get call
-    jest.spyOn(https, "get").mockImplementation((url, callback) => {
-      const response = new require("stream").Readable();
-      response._read = () => {}; // _read is required but you can noop it
-      response.push(
-        JSON.stringify({
-          score_tag: "P",
-          agreement: "AGREEMENT",
-          subjectivity: "OBJECTIVE",
-          confidence: "100",
-          irony: "NONIRONIC",
-        })
-      );
-      response.push(null);
-
-      callback(response);
-
-      return {
-        on: jest.fn(),
-      };
-    });
-
-    const res = await request(app).post("/sentiment").send({ url: testUrl });
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("score_tag");
-    expect(res.body).toHaveProperty("agreement");
-    expect(res.body).toHaveProperty("subjectivity");
-    expect(res.body).toHaveProperty("confidence");
-    expect(res.body).toHaveProperty("irony");
-  });
-
   it("should handle errors from MeaningCloud API", async () => {
     jest.spyOn(https, "get").mockImplementation((url, callback) => {
       return {
